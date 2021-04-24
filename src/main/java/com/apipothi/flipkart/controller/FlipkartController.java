@@ -1,5 +1,11 @@
 package com.apipothi.flipkart.controller;
-
+/*
+ * Author    : API POTHI
+ * YouTube   : https://www.youtube.com/apipothi
+ * Web Site  : http://apipothi.com/
+ * Play List : MICROSERVICE-SPRINGBOOT
+ * JAVA      : 1.8
+*/
 import java.util.List;
 import java.util.Set;
 
@@ -39,23 +45,9 @@ public class FlipkartController {
 	@Autowired
 	FlipkartServiceImpl service;
 
-	
-	@Value("${productmanufacturer.ribbon.listOfServers}")
-	private List<String> listOfServers;
-	
 	/*
 	 * Take All the product from PRODUCT MANUFACTURER and save it in to FLIPKART DB
 	 */
-	@GetMapping("/listOfServers")
-	public List<String> getBookInfo() {
-		
-		System.out.println("Book Price as Integer List - " + listOfServers);
-		
-		return listOfServers;
-		
-	}
-	
-	
 	@GetMapping("/addAllProductFromManufacturer")
 	public Response addAllProductFromManufacturer() {
 		String statusMsg = "";
@@ -82,9 +74,11 @@ public class FlipkartController {
 		return myresponse;
 	}
 
+	/**
+	 * Get The product details by ID from Flipkart DB
+	 */
 	@GetMapping("/getProductByIDInFlipkart/{id}")
 	public Response getProductByIDInFlipkart(@PathVariable int id) {
-		// Get The data from Flipkart DB by ID
 		logger.info("***START---getProductByIDInFlipkart() id{} " + id);
 		Response myresponse = new Response();
 		try {
@@ -104,9 +98,11 @@ public class FlipkartController {
 		return myresponse;
 	}
 
+	/**
+	 * Get all the product details from Flipkart DB
+	 */
 	@GetMapping("/getFlipkartProducts")
 	public Response getProductInFlipkart() {
-		// Get all the data from Flipkart DB
 		logger.info("***START---getProductInFlipkart()");
 		Response myresponse = new Response();
 		try {
@@ -127,9 +123,11 @@ public class FlipkartController {
 		return myresponse;
 	}
 
+	/**
+	 * Add the product details in to Flipkart DB
+	 * */
 	@PostMapping("/addProductInFlipkart")
 	public Response addProductInFlipkart(@RequestBody List<FlipkartRequest> request) {
-		// Add the data in Flipkart DB
 		logger.info("***START---addProductInFlipkart()" + request);
 		String statusMsg = "";
 		Response myresponse = new Response();
@@ -150,9 +148,11 @@ public class FlipkartController {
 		return myresponse;
 	}
 
+	/**
+	 * Update the product details in to Flipkart DB
+	 * */
 	@PutMapping("/updateProductInFlipkart/{id}")
 	public Response updateProductInFlipkart(@PathVariable int id, FlipkartRequest request) {
-		// Update the data in Flipkart DB
 		Response myresponse = new Response();
 		String statusMsg = "";
 		try {
@@ -171,9 +171,11 @@ public class FlipkartController {
 		return myresponse;
 	}
 
+	/**
+	 * Delete the product details in to Flipkart DB
+	 * */
 	@DeleteMapping("/deleteProductInFlipkart/{id}")
 	public Response deleteProductInFlipkart(@PathVariable int id) {
-		// Delete the data in Flipkart DB
 		boolean isSuccess;
 		Response myresponse = new Response();
 		isSuccess = service.deleteProductInFlipkart(id);
